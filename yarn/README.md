@@ -40,3 +40,8 @@ DRF策略
 ![pic](https://pan.zeekling.cn/zeekling/hadoop/yarn_00007.png)
 
 
+# 核心参数配置
+
+![pic](https://pan.zeekling.cn/zeekling/hadoop/yarn_00008.png)
+
+
