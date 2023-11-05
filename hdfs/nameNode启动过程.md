@@ -92,6 +92,7 @@ protected void initialize(Configuration conf) throws IOException {
   // .... 省略
 
   if (NamenodeRole.NAMENODE == role) {
+    // 启动HTTPServer,会调用NameNodeHttpServer中的start函数，是基于org.eclipse.jetty.server.Server实现的
     startHttpServer(conf);
   }
   // 从本地加载FSImage，并且与Editlog合并产生新的FSImage
@@ -231,4 +232,8 @@ public void activate(Configuration conf, long blockTotal) {
 }
 ```
 
+
+详细参见：
+
+![pic](https://pan.zeekling.cn/zeekling/hadoop/nn_0010.png)
 
