@@ -160,11 +160,6 @@ private void startCommonServices(Configuration conf) throws IOException {
       LOG.warn("ServicePlugin " + p + " could not be started", t);
     }
   }
-  LOG.info(getRole() + " RPC up at: " + getNameNodeAddress());
-  if (rpcServer.getServiceRpcAddress() != null) {
-    LOG.info(getRole() + " service RPC up at: "
-        + rpcServer.getServiceRpcAddress());
-  }
 }
 ```
 
@@ -230,6 +225,73 @@ public void activate(Configuration conf, long blockTotal) {
   mxBeanName = MBeans.register("NameNode", "BlockStats", this);
   bmSafeMode.activate(blockTotal);
 }
+```
+
+
+### datanodeManager.activate 
+
+datanodeManager 启动。
+
+```java
+void activate(final Configuration conf) {
+  datanodeAdminManager.activate(conf);
+  // beartbeat 启动。
+  heartbeatManager.activate();
+}
+```
+
+### datanodeAdminManager.activate 
+
+```java 
+void activate(Configuration conf) {
+    final int intervalSecs = (int) conf.getTimeDuration(
+        DFSConfigKeys.DFS_NAMENODE_DECOMMISSION_INTERVAL_KEY,
+        DFSConfigKeys.DFS_NAMENODE_DECOMMISSION_INTERVAL_DEFAULT,
+        TimeUnit.SECONDS);
+    checkArgument(intervalSecs >= 0, "Cannot set a negative " +
+        "value for " + DFSConfigKeys.DFS_NAMENODE_DECOMMISSION_INTERVAL_KEY);
+
+    int blocksPerInterval = conf.getInt(
+        DFSConfigKeys.DFS_NAMENODE_DECOMMISSION_BLOCKS_PER_INTERVAL_KEY,
+        DFSConfigKeys.DFS_NAMENODE_DECOMMISSION_BLOCKS_PER_INTERVAL_DEFAULT);
+
+    final String deprecatedKey = "dfs.namenode.decommission.nodes.per.interval";
+    final String strNodes = conf.get(deprecatedKey);
+    if (strNodes != null) {
+      LOG.warn("Deprecated configuration key {} will be ignored.", deprecatedKey);
+      LOG.warn("Please update your configuration to use {} instead.",
+          DFSConfigKeys.DFS_NAMENODE_DECOMMISSION_BLOCKS_PER_INTERVAL_KEY);
+    }
+
+    checkArgument(blocksPerInterval > 0,
+        "Must set a positive value for "
+        + DFSConfigKeys.DFS_NAMENODE_DECOMMISSION_BLOCKS_PER_INTERVAL_KEY);
+
+    final int maxConcurrentTrackedNodes = conf.getInt(
+        DFSConfigKeys.DFS_NAMENODE_DECOMMISSION_MAX_CONCURRENT_TRACKED_NODES,
+        DFSConfigKeys
+            .DFS_NAMENODE_DECOMMISSION_MAX_CONCURRENT_TRACKED_NODES_DEFAULT);
+    checkArgument(maxConcurrentTrackedNodes >= 0, "Cannot set a negative " +
+        "value for "
+        + DFSConfigKeys.DFS_NAMENODE_DECOMMISSION_MAX_CONCURRENT_TRACKED_NODES);
+
+    Class cls = null;
+    try {
+      cls = conf.getClass(
+          DFSConfigKeys.DFS_NAMENODE_DECOMMISSION_MONITOR_CLASS,
+          DatanodeAdminDefaultMonitor.class);
+      monitor =
+          (DatanodeAdminMonitorInterface)ReflectionUtils.newInstance(cls, conf);
+      monitor.setBlockManager(blockManager);
+      monitor.setNameSystem(namesystem);
+      monitor.setDatanodeAdminManager(this);
+    } catch (Exception e) {
+      throw new RuntimeException("Unable to create the Decommission monitor " +
+          "from "+cls, e);
+    }
+    executor.scheduleWithFixedDelay(monitor, intervalSecs, intervalSecs,
+        TimeUnit.SECONDS);
+  }
 ```
 
 
