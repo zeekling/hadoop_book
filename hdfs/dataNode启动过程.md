@@ -20,6 +20,8 @@ public static DataNode createDataNode(String args[], Configuration conf,
 
 ### makeInstance 
 
+初始化DataNode实例。
+
 ```java 
 static DataNode makeInstance(Collection<StorageLocation> dataDirs,
     Configuration conf, SecureResources resources) throws IOException {
