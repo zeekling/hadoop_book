@@ -96,3 +96,53 @@ fsd.updateCount(iip, context.quotaDelta(), false);
 - 删除EditLog。
 - 调用incrDeletedFileCount更新metrics信息。
 
+### 创建文件
+
+**接口**
+
+```java
+HdfsFileStatus startFile(String src, PermissionStatus permissions,
+      String holder, String clientMachine, EnumSet<CreateFlag> flag,
+      boolean createParent, short replication, long blockSize,
+      CryptoProtocolVersion[] supportedVersions, String ecPolicyName,
+      String storagePolicy, boolean logRetryCache) throws IOException {
+}
+```
+
+- 检查当前用户是否有写权限。
+- 检查是否处于安全模式，如果处于安全模式，则不能进行当前操作。
+- 检查是否对当前文件所在的目录是否有权限（开启权限管理的情况下）
+- 调用FSDirWriteFileOp.startFile开始创建文件或者覆盖已有文件。
+  - 对于已经存在的文件。在覆盖的场景下。主要核心代码如下，会将原来的文件删除。并且释放租约。
+  ```java
+  List<INode> toRemoveINodes = new ChunkedArrayList<>();
+  List<Long> toRemoveUCFiles = new ChunkedArrayList<>();
+  long ret = FSDirDeleteOp.delete(fsd, iip, toRemoveBlocks,
+                                  toRemoveINodes, toRemoveUCFiles, now());
+  if (ret >= 0) {
+    iip = INodesInPath.replace(iip, iip.length() - 1, null);
+    FSDirDeleteOp.incrDeletedFileCount(ret);
+    fsn.removeLeasesAndINodes(toRemoveUCFiles, toRemoveINodes, true);
+  }
+  ```
+  - 对于不需要覆盖的场景下，需要重新刷新租约信息。
+   ```java
+    fsn.recoverLeaseInternal(FSNamesystem.RecoverLeaseOp.CREATE_FILE, iip,
+                                 src, holder, clientMachine, false);
+   ```
+  - 对于父文件夹存在的时候，将文件添加到父文件夹下面。
+  ```java
+  iip = addFile(fsd, parent, iip.getLastLocalName(), permissions,
+      replication, blockSize, holder, clientMachine, shouldReplicate,
+      ecPolicyName, storagePolicy);
+  newNode = iip != null ? iip.getLastINode().asFile() : null;
+  ```
+ - 添加租约信息。
+  ```java
+  fsn.leaseManager.addLease(
+     newNode.getFileUnderConstructionFeature().getClientName(),
+     newNode.getId());
+  ```
+  - 返回文件信息。
+
+
