@@ -9,7 +9,27 @@ BPServiceActor 主要在DataNode中用于和NameNode沟通的类。主要功能�
 
 # 核心功能
 
-## 预注册
+BPServiceActor的入口函数为start函数，当前类本身为runnable接口的实现类，所以在start函数里面新建了BPServiceActor线程，并且将其启动，
+所以其真实的启动函数为run()
+
+在run函数里面主要做了连接NameNode并且注册当前DataNode的事。
+
+
+## 与NameNode握手
+
+首先要做的就是和NameNode建立连接，核心代码如下：
+```java
+bpNamenode = dn.connectToNN(nnAddr);
+```
+建立连接之后需要做的就是获取获取版本信息并且检查版本信息，如果单次获取失败会进行重试。失败之后每次的重试间隔为5s。
+
+```java
+NamespaceInfo nsInfo = retrieveNamespaceInfo();
+bpos.verifyAndSetNamespaceInfo(this, nsInfo);
+```
+
+
+到此与NameNode之间的握手结束。开始注册当前的DataNode到NameNode。
 
 
 ## 注册DataNode
