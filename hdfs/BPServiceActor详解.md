@@ -119,8 +119,28 @@ success = true;
 
 ## 发送心跳
 
+在DN和NN建立连接并且注册完成之后，会定时向NN发送心跳信息。入口函数为：offerService。在这个函数里面控制定时向NN发送心跳。
+通过下面类似的方式计算是否需要发送心跳：
+```java
+final boolean sendHeartbeat = scheduler.isHeartbeatDue(startTime);
+```
 
-## 处理NN的命令
+心跳信息包含下面信息：
+- DataNode名称。
+- DataNode文件传输的端口。
+- DataNode的所有容量。
+- DataNode的可用容量。
+- 慢盘等信息上报。
 
+心跳的响应类是HeartbeatResponse。主要包含下面信息：
+- NN的Ha状态信息。如果NN的主备信息发生变化，需要跟新DN中的NN信息。
+- NN发送给DN的所有命令。在offerService里面会将这些命令异步执行。
+- 滚动重启状态。
+- 最新的LeaseId。
+
+如果NN主动要求DN进行块上报，会在心跳里面触发块上报。
+
+
+发送心跳的函数是sendHeartBeat，
 
 
