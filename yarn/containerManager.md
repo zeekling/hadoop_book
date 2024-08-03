@@ -92,3 +92,52 @@ app.handle(new ApplicationContainerInitEvent(container));
 此状态会重新拉起所有的Container。
 
 
+# 启动Containers 
+
+## 获取NMToken
+
+在Container启动之前需要获取NMToken,可以通过下面命令获取，一般情况下获取第一个NMTokenIdentifier类型的Token。
+
+```java
+Set<TokenIdentifier> tokenIdentifiers = remoteUgi.getTokenIdentifiers();
+```
+
+## 开始启动Container 
+
+启动之前需要做的就是初始化ContainerImpl信息，方便后续启动Container。
+
+```java
+Container container =
+    new ContainerImpl(getConfig(), this.dispatcher,
+        launchContext, credentials, metrics, containerTokenIdentifier,
+        context, containerStartTime);
+
+```
+
+如果是第一次启动(满足条件：`!context.getApplications().containsKey(applicationID))`，也就是AM，会通过下面命令触发作业的启动：
+
+```java
+context.getNMStateStore().storeApplication(applicationID,
+    buildAppProto(applicationID, user, credentials, appAcls,
+        logAggregationContext, flowContext));
+dispatcher.getEventHandler().handle(new ApplicationInitEvent(
+    applicationID, appAcls, logAggregationContext));
+```
+
+满足下面条件则是恢复Application：
+
+`containerTokenIdentifier.getContainerType() == ContainerType.APPLICATION_MASTER && context.getApplications().containsKey(applicationID))`
+
+启动Container主要是触发Container的Init事件：
+
+```java
+this.context.getNMStateStore().storeContainer(containerId,
+    containerTokenIdentifier.getVersion(), containerStartTime, request);
+dispatcher.getEventHandler().handle(
+  new ApplicationContainerInitEvent(container));
+```
+
+## Container事件处理
+
+
+
