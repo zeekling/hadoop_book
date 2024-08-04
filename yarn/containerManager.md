@@ -142,6 +142,6 @@ dispatcher.getEventHandler().handle(
 Container启动的开始是从事件InitContainerTransition。由当前事件通过状态机转到其他状态。
 
 
-![pic](https://pan.zeekling/zeekling/hadoop/yarn/2024-08-04_17-35.png)
+![pic](https://pan.zeekling.cn/zeekling/hadoop/yarn/2024-08-04_17-35.png)
 
 
