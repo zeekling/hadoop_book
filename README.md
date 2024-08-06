@@ -32,7 +32,7 @@ mvn -T 8 package -Pdist,native -DskipTests -Dmaven.javadoc.skip=true
 - [ResourceManager详解](./yarn/resourcemanager.md)
 - [作业启动](./yarn/job_start.md)
 - Yarn NodeManager相关
-   - [NodeManager 详解](./yarn/containerManager.md)
+   - [containerManager 详解](./yarn/containerManager.md)
 
 - Yarn 事件相关
    - [Yarn状态机](./yarn/yarn_event.md)

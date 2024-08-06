@@ -137,7 +137,33 @@ dispatcher.getEventHandler().handle(
   new ApplicationContainerInitEvent(container));
 ```
 
-## Container事件处理
+# 停止Container
+
+## 获取NMToken 
+
+在Container停止之前需要获取NMToken,可以通过下面命令获取，一般情况下获取第一个NMTokenIdentifier类型的Token。和启动时候的类似。
+
+```java
+Set<TokenIdentifier> tokenIdentifiers = remoteUgi.getTokenIdentifiers();
+```
+
+## 停止作业
+
+停止作业的时候会优先通过`context.getContainers().get(containerID)`获取Container信息。
+
+如下场景会抛出异常：
+- 对于查询不到的Container，如果不是最新停止的，则会抛出异常。
+- 对于正在恢复的Container，不会接受停止，会抛出异常。
+
+
+停止作业的核心逻辑如下,核心思想是触发KILL事件。具体可以参见[Container事件处理](#Container事件处理)
+```java
+context.getNMStateStore().storeContainerKilled(containerID);
+container.sendKillEvent(ContainerExitStatus.KILLED_BY_APPMASTER,
+    "Container killed by the ApplicationMaster.");
+```
+
+# Container事件处理
 
 Container启动的开始是从事件InitContainerTransition。由当前事件通过状态机转到其他状态。
 
