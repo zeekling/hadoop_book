@@ -100,5 +100,34 @@ auth.authenticate(url, token);
 # 服务端认证
 
 
+## 初始化
+
+服务端初始化的入口函数类为AuthenticationFilter， 可以在web启动的时候将当前filter配置为AuthenticationFilter。用来实现服务端认证功能。
+
+其中函数init为filter的初始化函数，主要作用是加载authHandler以及其他参数。在加载完authHandler之后会调用authHandler的init函数。
+用来初始化authHandler。KerberosAuthenticationHandler就是一种authHandler。在初始化的时候会加载keytab和principal等信息。
+并且初试化gssManager。
+
+## 认证
+
+认证的入口函数filter函数。对于大部分的authHandler，最终认证都是调用authHandler的authenticate函数。针对KerberosAuthenticationHandler来讲。
+
+在需要认证的时候返回401，如下代码：
+```java
+response.setHeader(WWW_AUTHENTICATE, KerberosAuthenticator.NEGOTIATE);
+response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+```
+
+通过下面代码获取客户端Token。客户端的Token对应的keytab必须包含HTTP/*
+
+```java
+authorization = authorization.substring(KerberosAuthenticator.NEGOTIATE.length()).trim();
+final Base64 base64 = new Base64(0);
+final byte[] clientToken = base64.decode(authorization);
+```
+
+在与客户端的认证的过程中，可能会需要多次交换token（参考客户端流程），如果是在交互过程中，http请求的返回码是401。如果认证成功，状态码则是200.
+
+
 
 
