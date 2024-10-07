@@ -5,7 +5,7 @@
 
 集群中的DataNode向所有的NameNode注册，并定期向这些NameNode发送心跳和块信息，同时DataNode也会执行NameNode发送过来的命令。集群中的NameNodes共享所有DataNode的存储资源。HDFS Federation的架构如下图所示：
 
-![pic](https://yqfile.alicdn.com/86762f43d19784638401ac4283bc5fa1eeb27be2.png)
+![pic](https://pan.zeekling.cn/zeekling/hadoop/router/router_0001.png)
 
 # 子模块
 
