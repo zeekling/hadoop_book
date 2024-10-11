@@ -9,7 +9,9 @@
 
 # 子模块
 
-## State Store模块
+## 一、State Store模块
+
+当前模块主要用于保存Router状态信息，提供了文件系统(HDFS、本地)、Mysql、Zookeeper。个人觉得一般使用Zookeeper比较合理。
 
 ### 初始化
 
@@ -149,7 +151,7 @@ MySQLStateStoreHikariDataSourceConnectionFactory(Configuration conf) {
 
 ##### initRecordStorage
 
-zai StateStoreMySQLImpl当中，每个state store 对应一张表。建表语句如下：
+在StateStoreMySQLImpl当中，每个state store 对应一张表。建表语句如下：
 ```sql
 CREATE TABLE <className> (
    recordKey VARCHAR (255) NOT NULL,
@@ -163,10 +165,43 @@ CREATE TABLE <className> (
 
 ##### initDriver
 
+对于StateStoreZooKeeperImpl，initDriver中主要是建立zk连接。核心代码如下：
+```java
+this.zkManager = new ZKCuratorManager(conf);
+this.zkManager.start(zkHostPort);
+this.zkAcl = ZKCuratorManager.getZKAcls(conf);
+```
+对于异步模式，会创建线程池，用于异步保存状态。
+```java
+ThreadFactory threadFactory = new ThreadFactoryBuilder()
+    .setNameFormat("StateStore ZK Client-%d")
+    .build();
+this.executorService = new ThreadPoolExecutor(numThreads, numThreads,
+    0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), threadFactory);
+LOG.info("Init StateStoreZookeeperImpl by async mode with {} threads.", numThreads);
+```
+
 ##### initRecordStorage
 
+当前函数的实现比较简单，主要是在zk上面创建状态保存的目录。
+```java
+try {
+  String checkPath = getNodePath(baseZNode, className);
+  zkManager.createRootDirRecursively(checkPath, zkAcl);
+  return true;
+} catch (Exception e) {
+  LOG.error("Cannot initialize ZK node for {}: {}",
+      className, e.getMessage());
+  return false;
+}
+```
 
-## ActiveNamenodeResolver
+## 二、ActiveNamenodeResolver
+具体实现有配置项dfs.federation.router.namenode.resolver.client.class指定。默认为MembershipNamenodeResolver.class。目前最新的也只支持这一种。
+
+### MembershipNamenodeResolver
+
+
 
 
 ## subclusterResolver
