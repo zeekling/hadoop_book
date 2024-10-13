@@ -201,35 +201,27 @@ try {
 
 ### MembershipNamenodeResolver
 
+初始化如下,主要是初始化NN缓存以及将当前注册到stateStore里面。
 
+```java
+this.stateStore = store;
+this.cacheNS = new ConcurrentHashMap<>();
+this.cacheBP = new ConcurrentHashMap<>();
 
+if (this.stateStore != null) {
+  // Request cache updates from the state store
+  this.stateStore.registerCacheExternal(this);
+}
+```
+注册到stateStore里面的逻辑比较简单：
+```java
+public void registerCacheExternal(StateStoreCache client) {
+  this.cachesToUpdateExternal.add(client);
+}
+```
 
-## subclusterResolver
+## 三、subclusterResolver
+具体实现由配置项dfs.federation.router.file.resolver.client.class指定，默认为MountTableResolver.class。此外还支持MultipleDestinationMountTableResolver.class
 
-
-## RPC 
-
-
-## adminServer
-
-
-## httpServer
-
-
-## NameNode Heartbeat
-
-
-## Router metrics system
-
-
-## quota relevant service
-
-
-## Safemode
-
-
-## mount table cache update
-
-## quota manager
 
 
