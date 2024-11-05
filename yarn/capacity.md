@@ -102,8 +102,47 @@ for (String partition : partitions) {
 
 ## 资源分配具体实现
 
-资源分配的核心实现函数为allocateContainersToNode。
+资源分配的核心实现函数为allocateContainersToNode。首先检查当前节点是否存在运行时预留的资源，优先处理运行时预留资源。
 
+### 运行时预留
+
+
+### 资源分配
+
+对于可用资源和可kill的资源加和小于最小资源的时候，不会再进行资源分配或者资源预留了，因为资源肯定是不足的。
+
+资源存在的场景需要进行资源分配或者资源预留。核心实现函数为allocateOrReserveNewContainers。优先尝试按照标签分配资源。再没有分配到资源之后，最后尝试忽略资源标签进行分配。
+
+不忽略资源标签的分配的函数入口如下，资源分配都是从根队列开始分配的。
+
+```java
+CSAssignment assignment = getRootQueue().assignContainers(
+    getClusterResource(), candidates, new ResourceLimits(labelManager
+        .getResourceByLabel(candidates.getPartition(),
+            getClusterResource())),
+    SchedulingMode.RESPECT_PARTITION_EXCLUSIVITY);
+assignment.setSchedulingMode(SchedulingMode.RESPECT_PARTITION_EXCLUSIVITY);
+submitResourceCommitRequest(getClusterResource(), assignment);
+```
+
+对于忽略资源标签的实现如下：
+
+```java
+assignment = getRootQueue().assignContainers(getClusterResource(),
+    candidates,
+    // TODO, now we only consider limits for parent for non-labeled
+    // resources, should consider labeled resources as well.
+    new ResourceLimits(labelManager
+        .getResourceByLabel(RMNodeLabelsManager.NO_LABEL,
+            getClusterResource())),
+    SchedulingMode.IGNORE_PARTITION_EXCLUSIVITY);
+assignment.setSchedulingMode(SchedulingMode.IGNORE_PARTITION_EXCLUSIVITY);
+submitResourceCommitRequest(getClusterResource(), assignment);
+```
+
+#### assignContainers
+
+根队列的实现类为AbstractParentQueue.java。低版本的实现类为ParentQueue.java
 
 
 
