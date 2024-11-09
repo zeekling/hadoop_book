@@ -111,9 +111,9 @@ for (String partition : partitions) {
 
 对于可用资源和可kill的资源加和小于最小资源的时候，不会再进行资源分配或者资源预留了，因为资源肯定是不足的。
 
-资源存在的场景需要进行资源分配或者资源预留。核心实现函数为allocateOrReserveNewContainers。优先尝试按照标签分配资源。再没有分配到资源之后，最后尝试忽略资源标签进行分配。
+资源存在的场景需要进行资源分配或者资源预留。核心实现函数为allocateOrReserveNewContainers。优先尝试从没有标签的节点分配资源。再没有分配到资源之后，最后尝试按照资源标签进行分配。
 
-不忽略资源标签的分配的函数入口如下，资源分配都是从根队列开始分配的。
+从没有资源标签的节点分配的函数入口如下，资源分配都是从根队列开始分配的。
 
 ```java
 CSAssignment assignment = getRootQueue().assignContainers(
@@ -125,7 +125,7 @@ assignment.setSchedulingMode(SchedulingMode.RESPECT_PARTITION_EXCLUSIVITY);
 submitResourceCommitRequest(getClusterResource(), assignment);
 ```
 
-对于忽略资源标签的实现如下：
+对于包含资源标签的节点分配资源实现如下：
 
 ```java
 assignment = getRootQueue().assignContainers(getClusterResource(),
