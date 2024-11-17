@@ -7,4 +7,5 @@
 # 目录
 
 - [认证详解](./authenticated.md)
+- [主备倒换](./zk_failover.md)
 
