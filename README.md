@@ -9,7 +9,7 @@
 # -T 是编译的线程数，可以按照具体操作系统增加或者减少
 mvn -T 8 package -Pdist,native -DskipTests -Dmaven.javadoc.skip=true
 # or 忽略 本地方法编译
-mvn -T 8 package -P\!dist,\!native -DskipTests -Dmaven.javadoc.skip=true
+mvn -T 1C clean package -DskipTests -P\!sign -Pnative -P\!resource-bundle -PskipShade  -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true -Dpmd.skip=true
 ```
 
 # 知识树
