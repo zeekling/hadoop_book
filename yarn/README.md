@@ -1,7 +1,13 @@
 
-# 作业提交流程
+# 作业提交
+
+## 作业提交流程
 
 ![pic](https://pan.zeekling.cn/zeekling/hadoop/hadoop_namenode_00002.png)
+
+## 作业管理
+
+- [container-executor](./container-executor.md)
 
 
 # Yarn 调度器
