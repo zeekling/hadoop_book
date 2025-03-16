@@ -8,4 +8,6 @@
 
 - [认证详解](./authenticated.md)
 - [主备倒换](./zk_failover.md)
+- [队列]
+  - [fair Call Queue](./fair_call_queue.md)
 

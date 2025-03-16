@@ -19,6 +19,8 @@ mvn -T 1C clean package -DskipTests -P\!sign -Pnative -P\!resource-bundle -Pskip
 
 - [认证模块详解](./common/authenticated.md)
 - [主备倒换模块详解](./common/zk_failover.md)
+- [队列]
+  [Fair Call Queue](./common/fair_call_queue.md)
 
 
 ## HDFS 模块
@@ -50,6 +52,7 @@ mvn -T 1C clean package -DskipTests -P\!sign -Pnative -P\!resource-bundle -Pskip
 - [作业启动](./yarn/job_start.md)
 - Yarn NodeManager相关
    - [containerManager 详解](./yarn/containerManager.md)
+   - [container-executor详解](./yarn/container-executor.md)
 
 - Yarn 事件相关
    - [Yarn状态机](./yarn/yarn_event.md)
@@ -59,7 +62,6 @@ mvn -T 1C clean package -DskipTests -P\!sign -Pnative -P\!resource-bundle -Pskip
 
 - 工具相关
   - [Distcp详解](./yarn/distcp.md)
-
 
 ## Zookeeper模块
 - [Zookeeper概览](./zookeeper/README.md)
