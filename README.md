@@ -19,7 +19,7 @@ mvn -T 1C clean package -DskipTests -P\!sign -Pnative -P\!resource-bundle -Pskip
 
 - [认证模块详解](./common/authenticated.md)
 - [主备倒换模块详解](./common/zk_failover.md)
-- [队列]
+- 队列
   [Fair Call Queue](./common/fair_call_queue.md)
 
 
@@ -46,7 +46,7 @@ mvn -T 1C clean package -DskipTests -P\!sign -Pnative -P\!resource-bundle -Pskip
 ## Yarn 模块
 
 - [Yarn概览](./yarn/README.md)
-- [ResourceManager相关]
+- ResourceManager相关
    - [ResourceManager详解](./yarn/resourcemanager.md)
    - [Capacity调度器](./yarn/capacity.md)
 - [作业启动](./yarn/job_start.md)
