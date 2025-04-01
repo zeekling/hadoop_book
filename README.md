@@ -20,7 +20,7 @@ mvn -T 1C clean package -DskipTests -P\!sign -Pnative -P\!resource-bundle -Pskip
 - [认证模块详解](./common/authenticated.md)
 - [主备倒换模块详解](./common/zk_failover.md)
 - 队列
-  [Fair Call Queue](./common/fair_call_queue.md)
+  - [Fair Call Queue](./common/fair_call_queue.md)
 
 
 ## HDFS 模块
