@@ -5,12 +5,21 @@
 # 编译
 
 执行下面编译命令：
+
+Linux 下的编译命令如下：
+
 ```bash
 # -T 是编译的线程数，可以按照具体操作系统增加或者减少
 mvn -T 8 package -Pdist,native -DskipTests -Dmaven.javadoc.skip=true
 # or 忽略 本地方法编译
 mvn -T 1C clean package -DskipTests -P\!sign -Pnative -P\!resource-bundle -PskipShade  -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true -Dpmd.skip=true
 ```
+Windows 下面的编译命令如下（Windows下的二进制编译未调试通过）：
+
+```bash
+mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win
+```
+
 
 # 知识树
 
