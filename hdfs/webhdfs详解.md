@@ -150,6 +150,64 @@ NamenodeWebHdfsMethods里面定义的请求类型主要是：
 
 ### webhdfs 操作实现
 
-#### CREATE操作
+#### 1、 CREATE操作
+
+当前操作主要是使用webhdfs上传文件的操作，核心操作在DN和NN上面都有。在NN里面的操作主要是选择合适的DN节点，然后跳转到DN上面进行文件上传。
+
+核心处理流程如下：
+
+![pic](https://pan.zeekling.cn/zeekling/hadoop/namenode/nn_webhdfs.jpg)
+
+##### NN部分源码实现
+
+入口位置代码如下，在  redirectURI里面主要是选择合适的DN，选择合适DN的代码在函数redirectURI里面的chooseDatanode函数，但最终还是有BlockManager提供结果。
+
+```java
+case CREATE:
+    {
+      final NameNode namenode = (NameNode)context.getAttribute("name.node");
+      final URI uri = redirectURI(null, namenode, ugi, delegation, username,
+          doAsUser, fullpath, op.getValue(), -1L, blockSize.getValue(conf),
+          exclDatanodes.getValue(), permission, unmaskedPermission,
+          overwrite, bufferSize, replication, blockSize, createParent,
+          createFlagParam);
+      if(!noredirectParam.getValue()) {
+        return Response.temporaryRedirect(uri)
+          .type(MediaType.APPLICATION_OCTET_STREAM).build();
+      } else {
+        final String js = JsonUtil.toJsonString("Location", uri);
+        return Response.ok(js).type(MediaType.APPLICATION_JSON).build();
+      }
+    }
+```
+
+下面代码是为上传的文件选择块的逻辑的入口，选块的逻辑最后还是有BlockManager完成，核心函数为chooseTarget4WebHDFS。
+
+```java
+if (op == PutOpParam.Op.CREATE) {
+      //choose a datanode near to client 
+      final DatanodeDescriptor clientNode = bm.getDatanodeManager(
+          ).getDatanodeByHost(remoteAddr);
+      if (clientNode != null) {
+        final DatanodeStorageInfo[] storages = bm.chooseTarget4WebHDFS(
+            path, clientNode, excludes, blocksize);
+        if (storages.length > 0) {
+          return storages[0].getDatanodeDescriptor();
+        }
+      }
+    }
+```
+
+ chooseTarget4WebHDF函数里面实现如下，由此可以看出webhdfs写入的是单副本。
+
+```java
+ /** Choose target for WebHDFS redirection. */
+  public DatanodeStorageInfo[] chooseTarget4WebHDFS(String src,
+      DatanodeDescriptor clientnode, Set<Node> excludes, long blocksize) {
+    return placementPolicies.getPolicy(CONTIGUOUS).chooseTarget(src, 1,
+        clientnode, Collections.<DatanodeStorageInfo>emptyList(), false,
+        excludes, blocksize, storagePolicySuite.getDefaultPolicy(), null);
+  }
+```
 
 
