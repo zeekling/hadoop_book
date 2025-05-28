@@ -18,7 +18,8 @@ mvn -T 1C clean package -DskipTests -P\!sign -Pnative -P\!resource-bundle -Pskip
 Windows 下面的编译命令如下（Windows下的二进制编译未调试通过）：
 
 ```bash
-mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win
+# 本地编译，忽略二进制编译
+mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true -Dpmd.skip=true
 ```
 
 # 知识树
