@@ -1,4 +1,3 @@
-
 # 作业提交
 
 ## 作业提交流程
@@ -9,11 +8,9 @@
 
 - [container-executor](./container-executor.md)
 
-
 # Yarn 调度器
 
 ## 先进先出调度器
-
 
 ## 容量调度器
 
@@ -22,7 +19,6 @@
 ### 分配算法
 
 ![pic](https://pan.zeekling.cn/zeekling/hadoop/yarn_00001.png)
-
 
 ## 公平调度器
 
@@ -45,9 +41,6 @@
 DRF策略
 ![pic](https://pan.zeekling.cn/zeekling/hadoop/yarn_00007.png)
 
-
 # 核心参数配置
 
 ![pic](https://pan.zeekling.cn/zeekling/hadoop/yarn_00008.png)
-
-

@@ -1,4 +1,3 @@
-
 # 启动
 
 ## createDataNode
@@ -18,11 +17,11 @@ public static DataNode createDataNode(String args[], Configuration conf,
 }
 ```
 
-### makeInstance 
+### makeInstance
 
 初始化DataNode实例。
 
-```java 
+```java
 static DataNode makeInstance(Collection<StorageLocation> dataDirs,
     Configuration conf, SecureResources resources) throws IOException {
   List<StorageLocation> locations;
@@ -42,10 +41,9 @@ static DataNode makeInstance(Collection<StorageLocation> dataDirs,
 }
 ```
 
-### startDataNode 
+### startDataNode
 
-
-```java 
+```java
 void startDataNode(List<StorageLocation> dataDirectories,
                    SecureResources resources
                    ) throws IOException {
@@ -60,7 +58,7 @@ void startDataNode(List<StorageLocation> dataDirectories,
   // ... 省略 ....
 
   storage = new DataStorage();
-  
+
   // global DN settings
   registerMXBean();
   // 初始化dataXceiver服务：用于DN接受客户端和其他DN发送过来的数据的服务。
@@ -113,8 +111,7 @@ void startDataNode(List<StorageLocation> dataDirectories,
 
 主要是向NN注册当前DN。
 
-
-```java 
+```java
 private void doRefreshNamenodes(
     Map<String, Map<String, InetSocketAddress>> addrMap,
     Map<String, Map<String, InetSocketAddress>> lifelineAddrMap)
@@ -123,7 +120,7 @@ private void doRefreshNamenodes(
   Set<String> toRefresh = Sets.newLinkedHashSet();
   Set<String> toAdd = Sets.newLinkedHashSet();
   Set<String> toRemove;
-  
+
   synchronized (this) {
     // Step 1. For each of the new nameservices, figure out whether
     // it's an update of the set of NNs for an existing NS,
@@ -136,16 +133,16 @@ private void doRefreshNamenodes(
         toAdd.add(nameserviceId);
       }
     }
-    
+
     // Step 2. Any nameservices we currently have but are no longer present
     // need to be removed.
     // 计算当前DN需要删除的nameservice
     toRemove = Sets.newHashSet(Sets.difference(
         bpByNameserviceId.keySet(), addrMap.keySet()));
-    
+
     // Step 3. 启动新的nameservice
     if (!toAdd.isEmpty()) {
-    
+
       for (String nsToAdd : toAdd) {
         Map<String, InetSocketAddress> nnIdToAddr = addrMap.get(nsToAdd);
         Map<String, InetSocketAddress> nnIdToLifelineAddr =
@@ -175,7 +172,7 @@ private void doRefreshNamenodes(
   // of the synchronized(this) lock since they need to call
   // back to .remove() from another thread
   if (!toRemove.isEmpty()) {
-    
+
     for (String nsToRemove : toRemove) {
       BPOfferService bpos = bpByNameserviceId.get(nsToRemove);
       bpos.stop();
@@ -183,11 +180,11 @@ private void doRefreshNamenodes(
       // they will call remove on their own
     }
   }
-  
+
   // Step 5. Update nameservices whose NN list has changed 
   // 更新nameservices
   if (!toRefresh.isEmpty()) {
-    
+
     for (String nsToRefresh : toRefresh) {
       BPOfferService bpos = bpByNameserviceId.get(nsToRefresh);
       Map<String, InetSocketAddress> nnIdToAddr = addrMap.get(nsToRefresh);
@@ -224,5 +221,3 @@ private void doRefreshNamenodes(
   }
 }
 ```
-
-

@@ -54,8 +54,6 @@ job.getConfiguration().set(JobContext.MAP_SPECULATIVE, "false");
 
 其中比较常用的是DynamicInputFormat，DynamicInputFormat主要是通过主要是按照文件数量分配的。
 
-
-
 ## 作业运行
 
 ### AM运行
@@ -74,10 +72,84 @@ Distcp的AM结束时的核心处理类是CopyCommitter。结束的时候会调�
 
 #### preserveFileAttributesForDirectories函数
 
+当前函数是用于检查并修改文件属性的功能。当前是单线程运行，在文件多的时候可能会比较慢。同步的权限包含：
 
+- ACL权限。
+
+- 普通权限。
+
+- 副本数。
+
+- XATTR属性。
+
+- 用户以及用户组。
 
 ### Map运行
 
+Map运行的核心类是CopyMapper。当前类的核心函数为: `setup()`、 `map()`、 `cleanup()`、 `run()`
+
+#### setup函数
+
+setup函数主要是读取配置。setup函数的入参是Context，里面包含从客户端传入的配置文件信息。可以通过`context.getConfiguration()`获取。
+
+#### map函数
+
+map函数是复制数据的核心类，map的入参定义如下：
+
+```java
+public void map(Text relPath, CopyListingFileStatus sourceFileStatus,  
+ Context context) throws IOException, InterruptedException {
+}
+```
+
+- relPath：目标文件路径。
+
+- sourceFileStatus： 源端文件信息，包含路径。
+
+在map函数里面主要做了几件事：
+
+- 获取目标端文件信息，如果复制的属性里面包含XATTR，则需要单独调用getXAttrs接口获取XATTR信息，当前会多一次请求，大大的增加复制时间。
+
+- 检查当前文件是否需要复制，如果需要copy，则将文件拷贝到目标端。
+
+- 复制文件的属性到目标端。核心函数如下：
+
+```java
+DistCpUtils.preserve(target.getFileSystem(conf), tmpTarget,
+          sourceCurrStatus, fileAttributes, preserveRawXattrs);
+```
+
+
+
+#### cleanup函数
+
+在当前map结束之后调用，主要是更新统计信息，主要是复制带宽。如下：
+
+```java
+long secs = (System.currentTimeMillis() - startEpoch) / 1000;
+ incrementCounter(context, Counter.BANDWIDTH_IN_BYTES,
+        totalBytesCopied / ((secs == 0 ? 1 : secs)));
+```
+
+#### run函数
+
+主要是MapReduce框架层面的逻辑，控制map的所有流程，在处理完成之后调用cleanup。
+
+```java
+setup(context);
+try {
+  while (context.nextKeyValue()) {
+    map(context.getCurrentKey(), context.getCurrentValue(), context);
+  }
+} finally {
+  cleanup(context);
+}
+```
+
+
+
+
+
 ### Reduce运行
 
-
+DistCp作业没有reduce。
