@@ -142,13 +142,82 @@ boolean doRun = client.init(args);
 yarnClient.submitApplication(appContext);
 ```
 
-
-
 当前样例做到了作业所需要的信息可配置。是一个比较适合开发作业的样例。
 
-
-
 ## AM核心代码
+
+AM的核心代码是在ApplicationMaster.java里面的。在启动AM的时候会调用到当前函数的main函数。
+
+在构造函数里面和init函数里面，主要是加载配置项以及命令行参数。真正运行的函数是run，核心在run函数里面，
+
+首先需要创建和RM以及NM的连接。
+
+```java
+amRMClient = AMRMClientAsync.createAMRMClientAsync(1000, allocListener);
+amRMClient.init(conf);
+amRMClient.start();
+
+containerListener = createNMCallbackHandler();
+nmClientAsync = new NMClientAsyncImpl(containerListener);
+nmClientAsync.init(conf);
+nmClientAsync.start();  
+startTimelineClient(conf);
+```
+
+在AM启动OK了第一件事就是需要去RM上面注册，证明当前AM已经启动完成了。
+
+```java
+RegisterApplicationMasterResponse response = amRMClient
+        .registerApplicationMaster(appMasterHostname, appMasterRpcPort,
+            appMasterTrackingUrl, placementConstraintMap);
+```
+
+普通Container的申请是在AM里面处理的，类似下面代码，下面代码是异步申请的。
+
+```java
+ContainerRequest containerAsk = setupContainerAskForRM();
+amRMClient.addContainerRequest(containerAsk);
+```
+
+当Container申请好之后，可以通过下面代码获取，在样例中触发onContainerAllocated事件。
+
+```java
+List<Container> allocated = response.getAllocatedContainers();
+if (!allocated.isEmpty()) {
+    handler.onContainersAllocated(allocated);
+}
+```
+
+通过下面代码启动Container.
+
+```java
+ContainerLaunchContext ctx = ContainerLaunchContext.newInstance(
+        localResources, myShellEnv, commands, null, allTokens.duplicate(),
+          null, containerRetryContext); 
+nmClientAsync.startContainerAsync(container, ctx);
+```
+
+
+
+在作业结束的时候，AM需要做下面事：
+
+- 停止nmClient。
+
+- 从RM上取消AppMaster
+
+- 停止amClient。
+
+```java
+nmClientAsync.stop();
+try {
+    amRMClient.unregisterApplicationMaster(appStatus, message, null);
+} catch (YarnException | IOException ex) {
+    LOG.error("Failed to unregister application", ex);
+}
+amRMClient.stop();
+```
+
+
 
 
 
