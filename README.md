@@ -89,6 +89,7 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 ## Zookeeper模块
 
 - [Zookeeper概览](./zookeeper/README.md)
+- [Zookeeper启动源码详解](./zookeeper/Zookeeper启动源码详解.md)
 
 ## OZone 模块
 
