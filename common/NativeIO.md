@@ -45,3 +45,15 @@ Java_org_apache_hadoop_io_nativeio_NativeIO_initNative(
 - workaround_non_threadsafe_calls_init(env);初始化一个Object对象，用于实现加锁。
 
 
+## 底层IO操作
+
+NativeIO提供了很多底层IO操作的JNI。主要包括：
+
+| 函数名称 | 作用 |
+|---|---|
+| getPmdkLibPath()                                            | 获取HADOOP_PMDK_LIBRARY的路径 |
+| isPmemCheck(long address, long length)                      | 用于判断一段内存区域是否位于真正的持久内存上  |
+| pmemMapFile(String path, long length, boolean isFileExist); | 是将持久内存（Persistent Memory，PMEM）上的文件映射到进程的虚拟地址空间,调用库函数pmem_map_file |
+| pmemUnMap(long address, long length)                        | pmem_unmap是持久内存编程中的一个关键函数，它就像一位负责收尾的清道夫，安全地解除之前建立的内存映射关系，并确保数据的持久化。  |
+
+其他实现可自行查看NativeIO.c，基本都是对操作系统函数的封装，不再重复列出用途。
