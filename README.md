@@ -29,6 +29,7 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 | [认证模块详解](./common/authenticated.md)                 | --          | [Common 模块](./common/README.md) 
 | [主备倒换模块详解](./common/zk_failover.md)                |  --        | [Common 模块](./common/README.md) 
 | [Fair Call Queue](./common/fair_call_queue.md)            | 队列       | [Common 模块](./common/README.md)  
+| [NativeIO](./common/NativeIO.md)                          | IO 相关    | [Common 模块](./common/README.md)  
 | [namenode全景](./hdfs/namenode全景.md)                    |  NameNode相关    | [HDFS模块](./hdfs/README.md)  
 | [NameNode启动过程](./hdfs/nameNode启动过程.md)             |  NameNode相关   | [HDFS模块](./hdfs/README.md)  
 | [FsImage详解](./hdfs/fsImages.md)                         |  NameNode相关   | [HDFS模块](./hdfs/README.md)  
