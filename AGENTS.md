@@ -16,6 +16,28 @@ hadoop_book/
 └── watch/               # 特性追踪
 ```
 
+## Git 工作流程
+
+### 分支策略
+
+**禁止直接向 master 分支推送代码**
+
+必须使用分支工作流：
+1. 从 master 创建功能分支：`git checkout -b feature/your-feature-name`
+2. 在功能分支上进行开发和提交
+3. 完成后合并到 master：`git checkout master && git merge feature/your-feature-name`
+4. 推送到远程：`git push origin master`
+
+### 本地 Hook
+
+系统已配置 pre-push hook，禁止直接推送到 master 分支。如果尝试从 master 分支推送，会被自动拒绝。
+
+### 提交规范
+
+- 使用简洁的中文描述：如"重构README知识目录树结构"
+- 避免冗长描述，保持清晰简洁
+- 格式：动词+名词（如"添加httpfs详解文档"）
+
 ## 文档规范
 
 ### 文件命名
