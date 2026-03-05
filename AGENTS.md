@@ -25,12 +25,21 @@ hadoop_book/
 必须使用分支工作流：
 1. 从 master 创建功能分支：`git checkout -b feature/your-feature-name`
 2. 在功能分支上进行开发和提交
-3. 完成后合并到 master：`git checkout master && git merge feature/your-feature-name`
-4. 推送到远程：`git push origin master`
+3. 推送到远程：`git push origin feature/your-feature-name`
+4. 完成后合并到 master：`git checkout master && git merge feature/your-feature-name`
 
 ### 本地 Hook
 
-系统已配置 pre-push hook，禁止直接推送到 master 分支。如果尝试从 master 分支推送，会被自动拒绝。
+系统已配置 pre-push hook，禁止直接推送到 master 分支。
+
+**Hook 功能：**
+- 检测当前分支是否为 master
+- 如果在 master 分支上尝试 push，会被自动拒绝
+- 提供详细的错误信息和操作步骤
+
+**重要说明：**
+- 即使在 feature 分支上，也不应直接使用 refspec 将代码推送到 master
+- 应该先推送到远程 feature 分支，然后通过 pull request 或 merge request 合并到 master
 
 ### 提交规范
 
