@@ -68,6 +68,12 @@ hadoop_book/
 - 展示请求/响应和错误处理
 - 保持正确的缩进格式
 
+### 代码引用规范
+- 类引用使用完整包名：如 `org.apache.hadoop.hdfs.server.namenode.FSImage`
+- 方法引用使用 `ClassName#methodName` 格式
+- 配置参数使用反引号：如 `dfs namenode.name.dir`
+- 版本号使用官方格式：如 3.3.1
+
 ### 语气和风格
 - 专业技术中文
 - 简洁但全面
@@ -100,6 +106,38 @@ hadoop_book/
 - 架构图
 - 边界情况和错误处理
 
+## Markdown 格式规范
+
+### 标题层级
+- 使用 `#` 至 `######` 表示标题层级
+- 标题使用中文，避免使用英文缩写
+- 避免跳过标题层级（如从 H1 直接跳到 H3）
+
+### 代码块
+- 使用三个反引号标注代码块
+- 指定语言：` ```java `、` ```bash `、` ```xml ` 等
+- 代码过长时使用横向滚动条，避免换行破坏格式
+
+### 表格
+- 使用 Markdown 原生表格语法
+- 表头使用 `-` 分隔
+- 表格前后保留空行
+
+### 链接
+- 内部链接使用相对路径
+- 外部链接使用完整 URL
+- 链接文本应描述性，避免使用"点击这里"
+
+### 图片
+- 图片放在文档同级目录的 `images/` 文件夹中
+- 使用相对路径引用：`![描述](./images/filename.png)`
+- 图片描述应简洁明了
+
+### 列表
+- 使用 `-` 或 `*` 表示无序列表
+- 使用 `1.` `2.` `3.` 表示有序列表
+- 列表项内容较长时保持缩进一致
+
 ## 命令
 
 ```bash
@@ -111,6 +149,16 @@ grep -r "NameNode" --include="*.md"
 
 # 按模块统计文件数
 ls -1 */ | while read dir; do echo "$dir: $(find "$dir" -name "*.md" -type f | wc -l)"; done
+
+# 验证 Markdown 链接（检查破损链接）
+# 使用 markdown-link-check 或本地工具
+# mdlint: https://github.com/DavidAnson/markdownlint-cli
+
+# 检查文档编码和格式
+file *.md
+
+# 统计代码行数（Java 示例）
+find . -name "*.md" -exec grep -h "^```java" {} \; | wc -l
 ```
 
 ## 重要说明
