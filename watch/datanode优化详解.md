@@ -367,8 +367,8 @@ hdfs dfsadmin -reconfig datanode <host:port> status
 
 ## 推荐阅读
 
-- [HDFS DataNode启动过程](./dataNode启动过程.md)
-- [HDFS NameNode全景](./namenode全景.md)
-- [HDFS BPServiceActor详解](./BPServiceActor详解.md)
-- [3.3.1-3.4.1兼容性分析](../watch/3.3.1-3.4.1兼容性分析.md)
-- [值得关注的特性](../watch/值得关注的特性.md)
+- [HDFS DataNode启动过程](../hdfs/dataNode启动过程.md)
+- [HDFS NameNode全景](../hdfs/namenode全景.md)
+- [HDFS BPServiceActor详解](../hdfs/BPServiceActor详解.md)
+- [3.3.1-3.4.1兼容性分析](./3.3.1-3.4.1兼容性分析.md)
+- [值得关注的特性](./值得关注的特性.md)
