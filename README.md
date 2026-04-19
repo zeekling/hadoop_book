@@ -62,6 +62,7 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 | 知识库名称 | 二级分类 | 所属模块 |
 |---|---|----|
 | [Zookeeper启动源码详解](./zookeeper/Zookeeper启动源码详解.md) | ZooKeeper | [ZooKeeper 模块](./zookeeper/README.md)
+| [Zookeeper版本差异详解](./zookeeper/Zookeeper版本差异详解.md) | ZooKeeper | [ZooKeeper 模块](./zookeeper/README.md)
 
 ## 其他模块
 
