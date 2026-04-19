@@ -81,6 +81,7 @@ Datanode并不在同一个目录创建所有的文件，实际上，它用试探
 - **磁盘扫描**：DirectoryScanner/VolumeScanner损坏检测
 - **磁盘平衡**：DiskBalancer
 - **短路读取**：ShortCircuitRegistry
+- **版本优化**：[3.3.1后优化详解](./datanode优化详解.md)（细粒度锁、慢磁盘排除、动态重配置等）
 
 ### 3. 块管理（BlockManagement）
 

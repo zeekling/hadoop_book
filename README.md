@@ -37,6 +37,7 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 | [BPServiceActor详解](./hdfs/BPServiceActor详解.md) | NameNode | [HDFS 模块](./hdfs/README.md)
 | [文件上传](./hdfs/file_upload.md) | -- | [HDFS 模块](./hdfs/README.md)
 | [dataNode启动过程](./hdfs/dataNode启动过程.md) | DataNode | [HDFS 模块](./hdfs/README.md)
+| [DataNode优化详解](./hdfs/datanode优化详解.md) | DataNode | [HDFS 模块](./hdfs/README.md)
 | [journalnode](./hdfs/journalnode.md) | journalnode | [HDFS 模块](./hdfs/README.md)
 | [router启动详解](./hdfs/router启动详解.md) | 联邦 | [HDFS 模块](./hdfs/README.md)
 | [webhdfs详解](./hdfs/webhdfs详解.md) | webhdfs | [HDFS 模块](./hdfs/README.md)
