@@ -55,7 +55,7 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 | [Yarn状态机](./yarn/yarn_event.md) | 事件系统 | [YARN 模块](./yarn/README.md)
 | [Yarn事件处理机制](./yarn/yarn_event_detail.md) | 事件系统 | [YARN 模块](./yarn/README.md)
 | [DistributedShell](./yarn/DistributedShell.md) | 工具 | [YARN 模块](./yarn/README.md)
-
+| [YARN Federation 源码解读](./yarn/federation/YARN%20Federation%20源码解读.md) | 联邦 | [YARN 模块](./yarn/README.md)
 
 ## ZooKeeper
 
