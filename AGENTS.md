@@ -10,7 +10,7 @@ hadoop_book/
 ├── hdfs/     # NameNode、DataNode、FsImage、JournalNode、RBF
 ├── yarn/     # ResourceManager、调度器、Container、状态机
 ├── zookeeper/
-├── ozone/    # 占位，暂无文档
+├── ozone/ # Apache Ozone 分布式对象存储
 └── watch/    # 版本特性追踪、兼容性分析、开源问题分析、DN优化详解
 ```
 各模块有 `README.md` 作为目录索引，`attach/` 子目录存放文档配图。
