@@ -1,25 +1,26 @@
 # AGENTS.md
 
-## 仓库
-Apache Hadoop 中文技术文档仓库，分析组件源码和架构模式。基于 Hadoop 3.3.1 源码。
+## 仓库说明
+本文档仓库，分析 Apache Hadoop 3.3.1 源码并撰写架构文档。**非 Hadoop 源码库，无需构建/测试**。
 
-## 结构
-```
-hadoop_book/
-├── common/   # 身份验证、Fair Call Queue、NativeIO、Hadoop模块总览
-├── hdfs/     # NameNode、DataNode、FsImage、JournalNode、RBF
-├── yarn/     # ResourceManager、调度器、Container、状态机
-├── zookeeper/
-├── ozone/ # Apache Ozone 分布式对象存储
-└── watch/    # 版本特性追踪、兼容性分析、开源问题分析、DN优化详解
-```
-各模块有 `README.md` 作为目录索引，`attach/` 子目录存放文档配图。
+## 目录结构
+| 目录 | 内容 |
+|------|------|
+| `common/` | 身份验证、Fair Call Queue、NativeIO |
+| `hdfs/` | NameNode、DataNode、FsImage、JournalNode、RBF |
+| `yarn/` | ResourceManager、调度器、Container、状态机 |
+| `zookeeper/` | ZooKeeper 源码分析 |
+| `ozone/` | Apache Ozone 分布式对象存储 |
+| `watch/` | 版本特性追踪、兼容性分析、问题汇总 |
+| `attach/` | 各模块文档配图（图片托管于 `pan.zeekling.cn/zeekling/hadoop/`）|
+
+各模块根目录有 `README.md` 作为索引。
 
 ## Git 工作流
-- **禁止推 master**：本地 pre-push hook 阻止，merge 仅通过 Gitea PR
+- **禁止推 master**：本地 pre-push hook 阻止，仅通过 Gitea PR 合并
 - 分支命名：`feature/描述`（如 `feature/add-datanode-optimization-analysis`）
 - 提交信息：中文，简洁描述动作+对象（如"添加DataNode优化详解文档"）
-- 远程：`origin` → Gitea（`ssh://git@git.zeekling.cn:222/big-data/hadoop_book.git`），`github` → GitHub 镜像
+- 远程仓库：`origin` → Gitea（`ssh://git@git.zeekling.cn:222/big-data/hadoop_book.git`），`github` → GitHub 镜像
 
 ## 文件命名
 - 模块索引：`{模块名}/README.md`
@@ -51,7 +52,8 @@ hadoop_book/
 2. 在根 `README.md` 知识目录树添加条目
 3. 文档内推荐阅读使用正确的相对路径（`watch/` 内引用 `hdfs/` 需 `../hdfs/`）
 
-## 编译命令
+## 编译命令（参考）
+如需编译 Hadoop 源码参考：
 - Linux：`mvn -T 8 package -Pdist,native -DskipTests -Dmaven.javadoc.skip=true`
 - Windows：`mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true -Dpmd.skip=true`
 
