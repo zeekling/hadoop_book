@@ -52,11 +52,6 @@
 2. 在根 `README.md` 知识目录树添加条目
 3. 文档内推荐阅读使用正确的相对路径（`watch/` 内引用 `hdfs/` 需 `../hdfs/`）
 
-## 编译命令（参考）
-如需编译 Hadoop 源码参考：
-- Linux：`mvn -T 8 package -Pdist,native -DskipTests -Dmaven.javadoc.skip=true`
-- Windows：`mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true -Dpmd.skip=true`
-
 ## JIRA 数据获取
 Apache JIRA REST API 获取 issue 数据：
 ```
