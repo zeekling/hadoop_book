@@ -69,6 +69,7 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 | 知识库名称 | 二级分类 | 所属模块 |
 |---|---|----|
 | [Ozone 简介](./ozone/Ozone简介.md) | 简介 | [Ozone 模块](./ozone/README.md) |
+| [Ozone与HDFS对比分析](./watch/Ozone与HDFS对比分析.md) | 对比分析 | [Watch 模块](./watch/) |
 
 ## 其他模块
 
