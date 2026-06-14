@@ -21,6 +21,7 @@
 - 分支命名：`feature/描述`（如 `feature/add-datanode-optimization-analysis`）
 - 提交信息：中文，简洁描述动作+对象（如"添加DataNode优化详解文档"）
 - 远程仓库：`origin` → Gitea（`ssh://git@git.zeekling.cn:222/big-data/hadoop_book.git`），`github` → GitHub 镜像
+- **PR 编码**：创建/更新 PR 时，标题和正文必须使用 **UTF-8 编码**（避免中文及 emoji 字符乱码）；API 请求建议使用 `curl.exe` 或指定 `Content-Type: application/json; charset=utf-8`
 
 ## 文件命名
 - 模块索引：`{模块名}/README.md`
