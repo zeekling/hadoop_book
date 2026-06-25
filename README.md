@@ -88,3 +88,9 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 | [ä½œä¸šå†å²ç¼“å­˜](./yarn/jobhistory_cache.md) | JobHistory | [YARN æ¨¡å—](./yarn/README.md)
 | [Distcpè¯¦è§£](./yarn/distcp.md) | å·¥å…· | [YARN æ¨¡å—](./yarn/README.md)
 | [å€¼å¾—å…³æ³¨çš„ç‰¹æ€§](./watch/å€¼å¾—å…³æ³¨çš„ç‰¹æ€§.md) | -- | [Watch æ¨¡å—](./watch/)
+
+## ÑĞ¾¿ÂÛÎÄ
+
+| ÖªÊ¶¿âÃû³Æ | ¶ş¼¶·ÖÀà | ËùÊôÄ£¿é |
+|---|---|---|
+| [A Trust-Driven Optimization Model ·­Òë½âÎö](./research/A_Trust-Driven_Optimization_Model_·­Òë½âÎö.md) | °²È«ÓëÊÚÈ¨ | [Research Ä£¿é](./research/README.md) |
