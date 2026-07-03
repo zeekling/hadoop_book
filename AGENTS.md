@@ -1,33 +1,41 @@
 # AGENTS.md
 
 ## 仓库说明
-本文档仓库，分析 Apache Hadoop 3.3.1 源码并撰写架构文档。**非 Hadoop 源码库，无需构建/测试**。
+本文档仓库，分析 Apache Hadoop 3.3.1 源码并撰写架构文档。**非 Hadoop 源码库，无需构建/测试**。无 CI/CD、无 package.json、无 lint 配置——纯 Markdown + PDF。
 
 ## 目录结构
 | 目录 | 内容 |
 |------|------|
-| `common/` | 身份验证、Fair Call Queue、NativeIO |
-| `hdfs/` | NameNode、DataNode、FsImage、JournalNode、RBF |
-| `yarn/` | ResourceManager、调度器、Container、状态机 |
+| `common/` | 身份验证、Fair Call Queue、NativeIO、ZK 主备倒换 |
+| `hdfs/` | NameNode、DataNode、FsImage、JournalNode、RBF、客户端 |
+| `yarn/` | ResourceManager、调度器、Container、状态机、联邦 |
 | `zookeeper/` | ZooKeeper 源码分析 |
 | `ozone/` | Apache Ozone 分布式对象存储 |
-| `watch/` | 版本特性追踪、兼容性分析、问题汇总 |
-| `attach/` | 各模块文档配图（图片托管于 `pan.zeekling.cn/zeekling/hadoop/`）|
+| `research/` | 学术论文 PDF 原文 + 中文翻译/解析（含 FAST'26、NSDI'26、ICPP'25 等） |
+| `watch/` | 版本特性追踪（3.3.1→3.4.1→3.5.0）、兼容性分析、开源问题追踪 |
+| `common/attach/` `hdfs/attach/` `yarn/attach/` | 各模块配图（图片托管于 `pan.zeekling.cn/zeekling/hadoop/`，本地仅存引用） |
 
-各模块根目录有 `README.md` 作为索引。
+各模块根目录有 `README.md` 作为索引。根 `README.md` 是知识目录树，新增文档必须同步更新。
+
+## 文件类型
+- **Markdown**：技术文档、论文翻译、问题分析。所有内容中文。
+- **PDF**：仅存于 `research/`，论文原文。**二进制文件，不要用文本工具编辑。**
+- **图片**：不直接存储在仓库；通过 URL `![pic](https://pan.zeekling.cn/zeekling/hadoop/...)` 引用。
 
 ## Git 工作流
 - **禁止推 master**：本地 pre-push hook 阻止，仅通过 Gitea PR 合并
 - 分支命名：`feature/描述`（如 `feature/add-datanode-optimization-analysis`）
+  - 例外：`shuffle` 分支（历史遗留，非 feature/ 前缀）
 - 提交信息：中文，简洁描述动作+对象（如"添加DataNode优化详解文档"）
 - 远程仓库：`origin` → Gitea（`ssh://git@git.zeekling.cn:222/big-data/hadoop_book.git`），`github` → GitHub 镜像
 - **PR 编码**：创建/更新 PR 时，标题和正文必须使用 **UTF-8 编码**（避免中文及 emoji 字符乱码）；API 请求建议使用 `curl.exe` 或指定 `Content-Type: application/json; charset=utf-8`
 
 ## 文件命名
 - 模块索引：`{模块名}/README.md`
-- 技术详解：`{模块}/{组件}详解.md`
-- watch 分析：`watch/{主题}.md`（如 `3.3.1-3.4.1兼容性分析.md`、`datanode优化详解.md`）
-- kebab-case：`fair_call_queue.md`
+- 技术详解：`{模块}/{组件}详解.md`（中英文混排，如 `NameNode 组件详解.md`）
+- 论文翻译：`research/{论文名}_翻译解析.md`（保持原文前缀+中文后缀，如 `AITURBO_FAST26_翻译解析.md`）
+- 版本追踪：`watch/{主题}.md`（如 `3.3.1-3.4.1兼容性分析.md`）
+- **注意**：仓库同时使用 `snake_case`（`fair_call_queue.md`）和 `kebab-case`（`container-executor.md`）两种命名风格，新增文件时参考所在模块已有文件的风格。
 
 ## 文档结构
 1. 标题（`# 标题`）
@@ -44,14 +52,14 @@
 - **方法引用**：`ClassName#methodName`
 - **配置引用**：反引号包裹 `` `dfs.namenode.name.dir` ``
 - **版本号**：3.3.1（不用 v3.3.1）
-- **图片**：托管于 `pan.zeekling.cn/zeekling/hadoop/`
-- **内部链接**：相对路径
+- **图片**：托管于 `pan.zeekling.cn/zeekling/hadoop/`，图片格式常见为 `hadoop_xxx_00001.png`
+- **内部链接**：相对路径（`watch/` 内引用 `hdfs/` 需 `../hdfs/`）
 - **JIRA issue**：表格中加粗关键 issue（如 `**HDFS-15382**`）
 
 ## 新增文档必做
 1. 在对应模块 `README.md` 添加链接
-2. 在根 `README.md` 知识目录树添加条目
-3. 文档内推荐阅读使用正确的相对路径（`watch/` 内引用 `hdfs/` 需 `../hdfs/`）
+2. 在根 `README.md` 知识目录树添加条目（按模块分类表格）
+3. 文档内推荐阅读使用正确的相对路径
 
 ## JIRA 数据获取
 Apache JIRA REST API 获取 issue 数据：
