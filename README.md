@@ -162,6 +162,7 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 | 知识库名称 | 二级分类 | 所属模块 |
 |---|---|---|
 | [DataNode优化详解（3.3.1后）](./watch/datanode优化详解.md) | DataNode 优化 | [Watch 模块](./watch/) |
+| [HDFS 小文件问题全景分析（2022-2026）](./watch/HDFS小文件问题分析报告_2022-2026.md) | HDFS 小文件 | [Watch 模块](./watch/) |
 | [HDFS 多管道并行写入优化](./watch/hdfs-multi-pipeline-optimization.md) | HDFS 优化 | [Watch 模块](./watch/) |
 | [3.3.1-3.4.1 兼容性分析](./watch/3.3.1-3.4.1兼容性分析.md) | 版本兼容性 | [Watch 模块](./watch/) |
 | [3.3.1-3.5.0 兼容性预测分析](./watch/3.3.1-3.5.0兼容性预测分析.md) | 版本兼容性 | [Watch 模块](./watch/) |
