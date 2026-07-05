@@ -1,7 +1,7 @@
 # AGENTS.md
 
 ## 仓库说明
-本文档仓库，分析 Apache Hadoop 3.3.1 源码并撰写架构文档。**非 Hadoop 源码库，无需构建/测试**。无 CI/CD、无 package.json、无 lint 配置——纯 Markdown + PDF。
+本文档仓库，分析 Apache Hadoop 3.3.1 源码并撰写架构文档。**非 Hadoop 源码库，无需构建/测试**。无 CI/CD、无 package.json、无 lint 配置——纯 Markdown + PDF。**所有操作均为文件编辑，无任何编译/测试/构建命令可执行。**
 
 ## 目录结构
 | 目录 | 内容 |
@@ -47,19 +47,27 @@
 
 ## 内容规范
 - **语言**：所有内容中文
+- **编码**：所有 `.md` 文件必须为 **UTF-8 编码**（无 BOM），禁止 GBK/GB2312（曾有文件因混合编码导致显示异常）
 - **代码示例**：Java
 - **类引用**：全限定名 `org.apache.hadoop.hdfs.server.namenode.FSImage`
 - **方法引用**：`ClassName#methodName`
 - **配置引用**：反引号包裹 `` `dfs.namenode.name.dir` ``
 - **版本号**：3.3.1（不用 v3.3.1）
-- **图片**：托管于 `pan.zeekling.cn/zeekling/hadoop/`，图片格式常见为 `hadoop_xxx_00001.png`
+- **图片**：托管于 `pan.zeekling.cn/zeekling/hadoop/`，图片格式 `hadoop_xxx_00001.png`，通过 `![pic](URL)` 引用
 - **内部链接**：相对路径（`watch/` 内引用 `hdfs/` 需 `../hdfs/`）
 - **JIRA issue**：表格中加粗关键 issue（如 `**HDFS-15382**`）
 
 ## 新增文档必做
-1. 在对应模块 `README.md` 添加链接
+1. 在对应模块 `README.md` 添加链接（`watch/` 无 README.md，新增 `watch/` 文档需在根 `README.md` 知识目录树中添加条目，但不在 `watch/` 下创建 README）
 2. 在根 `README.md` 知识目录树添加条目（按模块分类表格）
 3. 文档内推荐阅读使用正确的相对路径
+
+## 新增论文翻译必做
+1. 学术 PDF 存于 `research/`，命名保持原文标题（如 `AITURBO_FAST26.pdf`）
+2. 中文翻译/解析文件命名：`{原文前缀}_翻译解析.md`（如 `AITURBO_FAST26_翻译解析.md`）；部分文档可能使用 `{英文标题}论文全文中文翻译.md`（如 `Fletch论文全文中文翻译.md`）
+3. 论文 PDF 和翻译解析文件之间通过 README 表格链接关联
+4. 在 `research/README.md` 论文列表表格中添加条目（含 PDF → 翻译解析双向链接）
+5. 在根 `README.md` 研究论文表格中添加条目
 
 ## JIRA 数据获取
 Apache JIRA REST API 获取 issue 数据：
