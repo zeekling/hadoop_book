@@ -185,6 +185,7 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 | [Origami 论文笔记](./Origami_ICPP25.md) (ICPP'25) | ML 驱动元数据负载均衡 | [仓库根目录](./) |
 | [HDFS & YARN 高质量论文分析报告 (2021-2026)](./research/HDFS_YARN_高质量论文分析报告_2021-2026.md) | 综述分析 | [Research 模块](./research/README.md) |
 | [HDFS × YARN × AI 交叉论文分析 (2021-2026)](./research/HDFS_YARN_AI_交叉论文分析_2021-2026.md) | AI 交叉分析 | [Research 模块](./research/README.md) |
+| [HDFS 与小文件问题 — 近5年研究综述](./research/hdfs/README.md) | 综述分析 | [Research 模块](./research/README.md) |
 
 ## 其他资源
 
