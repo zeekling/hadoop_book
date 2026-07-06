@@ -163,8 +163,10 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 |---|---|---|
 | [DataNode优化详解（3.3.1后）](./watch/datanode优化详解.md) | DataNode 优化 | [Watch 模块](./watch/) |
 | [HDFS 小文件问题全景分析（2022-2026）](./watch/HDFS小文件问题分析报告_2022-2026.md) | HDFS 小文件 | [Watch 模块](./watch/) |
+| [HDFS 性能优化全景分析（2022-2026）](./watch/HDFS性能优化分析报告_2022-2026.md) | HDFS 性能 | [Watch 模块](./watch/) |
 | [HDFS 多管道并行写入优化](./watch/hdfs-multi-pipeline-optimization.md) | HDFS 优化 | [Watch 模块](./watch/) |
 | [YARN 调度器优化全景分析（2022-2026）](./watch/YARN调度器优化分析报告_2022-2026.md) | YARN 调度器 | [Watch 模块](./watch/) |
+| [YARN 性能优化全景分析（2022-2026）](./watch/YARN性能优化分析报告_2022-2026.md) | YARN 性能 | [Watch 模块](./watch/) |
 | [3.3.1-3.4.1 兼容性分析](./watch/3.3.1-3.4.1兼容性分析.md) | 版本兼容性 | [Watch 模块](./watch/) |
 | [3.3.1-3.5.0 兼容性预测分析](./watch/3.3.1-3.5.0兼容性预测分析.md) | 版本兼容性 | [Watch 模块](./watch/) |
 | [2026.03.28 开源最新问题分析](./watch/2026.03.28开源最新问题分析.md) | Issue 追踪 | [Watch 模块](./watch/) |
