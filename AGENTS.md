@@ -18,6 +18,7 @@
 | `zookeeper/` | ZooKeeper 启动流程 + 版本差异 |
 | `ozone/` | Ozone 分布式对象存储（简介/模块/功能/CLI+安全） |
 | `research/` | 学术论文 PDF + 中文翻译/解析 + 分析报告 |
+| `research/hdfs/` | HDFS 专项论文综述（含 README 索引） |
 | `watch/` | 版本特性追踪、兼容性分析（3.3.1→3.4.1→3.5.0）、Issue 追踪 |
 
 各模块根目录有 `README.md` 作为索引（`watch/` 除外——它无 README.md，新增文档直接在根 `README.md` 知识目录树添加条目）。
@@ -75,7 +76,7 @@
 - 仓库无 `.opencode/` 目录（OpenCode 配置文件/插件在用户级全局目录，不跟踪到仓库）
 
 ## 模块 README 概况
-- `hdfs/README.md` — ~590 行，类和方法级详细列表
+- `hdfs/README.md` — ~586 行，类和方法级详细列表
 - `yarn/README.md` — ~1600 行，含调度器详解（最大模块 README）
 - `common/README.md` — 模块索引，较短（仅列出3个文档，实际根 `README.md` 列出了6个；新增文档仍需在根 `README.md` 和 `common/README.md` 同时添加）
 - `common/applicationhistoryservice/README.md` — 空占位
