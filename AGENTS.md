@@ -7,7 +7,6 @@
 - README.md 配有 shields.io 徽章（GitHub 统计），但无 CI 流水线
 
 ## 目录结构
-
 | 目录 | 内容 |
 |------|------|
 | `common/` | 通用模块：认证、Fair Call Queue、NativeIO、ZK 主备倒换、CLI |
@@ -30,7 +29,7 @@
 - `hadoop_300_question.md` — Hadoop 面试题集（当前为占位桩，仅 1 个条目）
 - `Origami_ICPP25.md` — Origami 论文笔记（ICPP'25），存根目录而非 `research/`
 
-## File types / 文件类型
+## 文件类型
 - **Markdown**：技术文档、论文翻译。全部中文。**UTF-8 无 BOM**（曾因 GBK/UTF-8 混合编码导致显示异常）。
 - **PDF**：仅存 `research/`，二进制文件，不要用文本工具编辑。
 - **图片**：不直接存储，通过 URL `![pic](https://pan.zeekling.cn/zeekling/hadoop/...)` 引用。
