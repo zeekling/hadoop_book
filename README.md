@@ -2,8 +2,6 @@
 
 本仓库用于记录学习Hadoop相关笔记，菜就多做笔记。
 
-[![Star History Chart](https://api.star-history.com/svg?repos=zeekling/hadoop_book&type=Date)](https://star-history.com/#zeekling/hadoop_book&Date)
-
 [![Last Commit](https://img.shields.io/github/last-commit/zeekling/hadoop_book)](https://github.com/zeekling/hadoop_book/graphs/commit-activity) [![Commits per Year](https://img.shields.io/github/commit-activity/y/zeekling/hadoop_book)](https://github.com/zeekling/hadoop_book/graphs/commit-activity) [![Monthly Activity](https://img.shields.io/github/commit-activity/m/zeekling/hadoop_book)](https://github.com/zeekling/hadoop_book/graphs/commit-activity) [![Watchers](https://img.shields.io/github/watchers/zeekling/hadoop_book?style=social&label=Watch)](https://github.com/zeekling/hadoop_book/watchers) ![Visitors](https://visitor-badge.laobi.icu/badge?page_id=zeekling.hadoop_book)
 
 # 编译
