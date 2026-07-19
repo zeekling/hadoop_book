@@ -28,7 +28,6 @@
 
 ### 根目录特殊文件
 - `hadoop_300_question.md` — Hadoop 面试题集（当前为占位桩，仅 1 个条目）
-- `Origami_ICPP25.md` — Origami 论文笔记（ICPP'25），存根目录而非 `research/`
 
 ## 文件类型与编码
 - **Markdown**：全部中文。**UTF-8 无 BOM**（曾因 GBK/UTF-8 混合编码导致显示异常）
