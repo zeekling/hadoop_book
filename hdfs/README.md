@@ -70,6 +70,7 @@ Datanode并不在同一个目录创建所有的文件，实际上，它用试探
 - **安全模式**：启动时安全模式管理
 - **高可用**：HAContext/BootstrapStandby主备切换
 - **加密**：FSDirEncryptionZoneOp加密区域、ReencryptionHandler重加密
+- **升级模式**：[HDFS 升级模式分析](./HDFS%20升级模式分析.md)——标准升级/滚动升级
 
 ### 2. DataNode（数据节点）
 
