@@ -80,6 +80,7 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 |---|---|---|
 | [HDFS 功能详解](./hdfs/HDFS%20功能详解.md) | 功能 | [HDFS 模块](./hdfs/README.md) |
 | [HDFS 功能总结](./hdfs/HDFS%20功能总结.md) | 总结 | [HDFS 模块](./hdfs/README.md) |
+| [HDFS 升级模式分析](./hdfs/HDFS%20升级模式分析.md) | 升级模式 | [HDFS 模块](./hdfs/README.md) |
 
 ## YARN 相关
 
