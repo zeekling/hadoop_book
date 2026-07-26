@@ -1,6 +1,6 @@
 # 简介
 
-本仓库用于记录学习Hadoop相关笔记，菜就多做笔记。
+Apache Hadoop 3.3.1 源码分析笔记，深入解读 HDFS、YARN、Common、ZooKeeper、Ozone 等核心模块的实现原理与设计思想，同时收录相关学术论文翻译及版本演进追踪分析。
 
 [![Stars](https://img.shields.io/github/stars/zeekling/hadoop_book)](https://github.com/zeekling/hadoop_book/stargazers) [![Last Commit](https://img.shields.io/github/last-commit/zeekling/hadoop_book)](https://github.com/zeekling/hadoop_book/graphs/commit-activity) [![Commits per Year](https://img.shields.io/github/commit-activity/y/zeekling/hadoop_book)](https://github.com/zeekling/hadoop_book/graphs/commit-activity) [![Monthly Activity](https://img.shields.io/github/commit-activity/m/zeekling/hadoop_book)](https://github.com/zeekling/hadoop_book/graphs/commit-activity) [![Watchers](https://img.shields.io/github/watchers/zeekling/hadoop_book?style=social&label=Watch)](https://github.com/zeekling/hadoop_book/watchers) ![Visitors](https://visitor-badge.laobi.icu/badge?page_id=zeekling.hadoop_book)
 
