@@ -35,7 +35,7 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 | [namenode全景](./hdfs/namenode全景.md) | 全景 | [HDFS 模块](./hdfs/README.md) |
 | [NameNode启动过程](./hdfs/nameNode启动过程.md) | 启动 | [HDFS 模块](./hdfs/README.md) |
 | [NameNode 组件详解](./hdfs/NameNode%20组件详解.md) | 组件 | [HDFS 模块](./hdfs/README.md) |
-| [FsImage详解](./hdfs/fsImages.md) | 镜像 | [HDFS 模块](./hdfs/README.md) |
+| [FsImage详解](./hdfs/FsImage详解.md) | 镜像 | [HDFS 模块](./hdfs/README.md) |
 | [NamenodeProtocols详解](./hdfs/NamenodeProtocols详解.md) | 协议 | [HDFS 模块](./hdfs/README.md) |
 | [leaseManager详解](./hdfs/leaseManager详解.md) | 租赁 | [HDFS 模块](./hdfs/README.md) |
 | [FSDirectory详解](./hdfs/FSDirectory详解.md) | 目录树 | [HDFS 模块](./hdfs/README.md) |

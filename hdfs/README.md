@@ -66,7 +66,7 @@ Datanode并不在同一个目录创建所有的文件，实际上，它用试探
 - **租赁管理**：LeaseManager文件写入租约
 - **快照管理**：SnapshotManager快照创建/删除/差异比较
 - **配额管理**：目录空间和文件数量配额
-- **镜像和编辑日志**：FSImage/FSEditLog日志存储和滚动
+- **镜像和编辑日志**：[FsImage详解](./FsImage详解.md) —— FSImage/FSEditLog 日志存储和滚动
 - **安全模式**：启动时安全模式管理
 - **高可用**：HAContext/BootstrapStandby主备切换
 - **加密**：FSDirEncryptionZoneOp加密区域、ReencryptionHandler重加密
