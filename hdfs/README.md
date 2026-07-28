@@ -67,6 +67,7 @@ Datanode并不在同一个目录创建所有的文件，实际上，它用试探
 - **快照管理**：SnapshotManager快照创建/删除/差异比较
 - **配额管理**：目录空间和文件数量配额
 - **镜像和编辑日志**：[FsImage详解](./FsImage详解.md) —— FSImage/FSEditLog 日志存储和滚动
+- **FSImage 工具集**：[FSImageTools详解](./FSImageTools详解.md) —— 离线查看/分析/校验/逆向重建/模拟（oiv/oer/oev/otr）
 - **安全模式**：启动时安全模式管理
 - **高可用**：HAContext/BootstrapStandby主备切换
 - **加密**：FSDirEncryptionZoneOp加密区域、ReencryptionHandler重加密
@@ -120,7 +121,7 @@ Datanode并不在同一个目录创建所有的文件，实际上，它用试探
 | StoragePolicyAdmin | 存储策略设置 |
 | DiskBalancerCLI | 磁盘平衡计划/执行 |
 | LsSnapshot/LsSnapshottableDir/SnapshotDiff | 快照工具 |
-| OfflineImageViewer | 离线镜像查看（XML/文本/统计） |
+| OfflineImageViewer | 离线镜像查看（XML/文本/统计） — 详见 [FSImageTools详解](./FSImageTools详解.md) |
 | GetConf/JMXGet | 配置/JMX获取 |
 | HDFSConcat/DebugAdmin | 文件合并/调试 |
 
