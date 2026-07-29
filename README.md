@@ -122,6 +122,7 @@ mvn -T 1C clean install -DskipTests -PskipShade -P\!native-win -PskipShade  -Dma
 |---|---|---|
 | [DistributedShell](./yarn/DistributedShell.md) | 示例 | [YARN 模块](./yarn/README.md) |
 | [Distcp详解](./yarn/distcp.md) | 工具 | [YARN 模块](./yarn/README.md) |
+| [YarnJobStatusOfflineTools](./yarn/YarnJobStatusOfflineTools.md) | 作业状态 | [YARN 模块](./yarn/README.md) |
 | [作业启动](./yarn/job_start.md) | 作业 | [YARN 模块](./yarn/README.md) |
 | [作业历史缓存](./yarn/jobhistory_cache.md) | JobHistory | [YARN 模块](./yarn/README.md) |
 | [SharedCacheManager](./yarn/SharedCacheManager.md) | 共享缓存 | [YARN 模块](./yarn/README.md) |
