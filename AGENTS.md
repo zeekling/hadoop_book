@@ -5,7 +5,6 @@
 - 内容：Markdown 技术文档/论文翻译/问题分析 + PDF（仅存 `research/`）
 - 无 CI/CD、package.json、lint 配置、可执行的构建命令
 - 根 `README.md` 含有 Hadoop 源码编译命令（`mvn`），仅作为参考，**不要在此仓库执行**
-- 共 86 个 Markdown 文件，189 次 Git 提交
 
 ## 目录结构
 | 目录 | 内容 |
@@ -24,10 +23,10 @@
 各模块根目录有 `README.md` 作为索引（**`watch/` 无 README.md**——新增文档直接在根 `README.md` 知识目录树添加条目）。
 
 ### 配图源文件
-`common/attach/`（2 个 .eddx）、`hdfs/attach/`（2 个 .eddx）、`yarn/attach/`（3 个 .eddx）存放 `.eddx` 文件（EdrawMax 格式），不要用文本工具编辑。图片托管于 `pan.zeekling.cn/zeekling/hadoop/`，仓库内仅存引用 URL `![pic](https://pan.zeekling.cn/zeekling/hadoop/{模块}_xxx_00001.png)`。
+`common/attach/`、`hdfs/attach/`、`yarn/attach/` 存放 `.eddx` 文件（EdrawMax 格式），**不要用文本工具编辑**。图片托管于 `pan.zeekling.cn/zeekling/hadoop/`，仓库内仅存引用 URL `![pic](https://pan.zeekling.cn/zeekling/hadoop/{模块}_xxx_00001.png)`。
 
 ### 根目录特殊文件
-- `hadoop_300_question.md` — Hadoop 面试题集（当前为占位桩，仅 1 个条目）
+- `hadoop_300_question.md` — Hadoop 面试题集（占位桩）
 
 ## 文件类型与编码
 - **Markdown**：全部中文。**UTF-8 无 BOM**（曾因 GBK/UTF-8 混合编码导致显示异常）
@@ -71,19 +70,6 @@
 ## OpenCode 配置
 - 仓库无 `opencode.json`（通过 `AGENTS.md` 内部指令驱动）
 - 仓库无 `.opencode/` 目录（配置文件在用户级全局目录，不跟踪到仓库）
-
-## 模块 README 概况
-| 文件 | 行数 | 类型 |
-|------|------|------|
-| `hdfs/README.md` | 586 | 类和方法级详细列表 |
-| `yarn/README.md` | 1583 | 含调度器详解（最大模块 README） |
-| `research/README.md` | 18 | 论文列表（部分缺失，根 README 为权威入口） |
-| `research/hdfs/README.md` | 70 | HDFS 小文件问题综述索引 |
-| `common/README.md` | 13 | 轻索引（仅列出 3 个文档，实际根 README 列出了 6 个） |
-| `ozone/README.md` | 5 | 轻索引 |
-| `zookeeper/README.md` | 5 | 轻索引 |
-| `common/applicationhistoryservice/README.md` | 空占位 |
-注意：新增文档需同时在根 `README.md` 和模块 `README.md` 添加链接。
 
 ## JIRA 数据获取
 ```
